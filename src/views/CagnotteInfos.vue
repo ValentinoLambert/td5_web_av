@@ -55,12 +55,19 @@ export default {
   },
   computed: {
     progressPercent() {
-      if (!this.cagnotte.goal || this.cagnotte.goal === 0) return 0
-      const percent = (this.cagnotte.collected / this.cagnotte.goal) * 100
+      const goal = Number(this.cagnotte.goal)
+      const collected = Number(this.cagnotte.collected)
+      if (!goal || Number.isNaN(goal)) return 0
+      const safeCollected = Number.isNaN(collected) ? 0 : collected
+      const percent = (safeCollected / goal) * 100
       return Math.min(Math.round(percent), 100)
     },
     remaining() {
-      return Math.max(0, this.cagnotte.goal - this.cagnotte.collected)
+      const goal = Number(this.cagnotte.goal)
+      const collected = Number(this.cagnotte.collected)
+      const safeGoal = Number.isNaN(goal) ? 0 : goal
+      const safeCollected = Number.isNaN(collected) ? 0 : collected
+      return Math.max(0, safeGoal - safeCollected)
     },
     daysRemaining() {
       const endDate = new Date(this.cagnotte.end_date)
@@ -83,8 +90,11 @@ export default {
       }
     },
     averageDonation() {
-      if (!this.cagnotte.nb_donations || this.cagnotte.nb_donations === 0) return 0
-      return this.cagnotte.collected / this.cagnotte.nb_donations
+      const donations = Number(this.cagnotte.nb_donations)
+      const collected = Number(this.cagnotte.collected)
+      if (!donations || Number.isNaN(donations)) return 0
+      const safeCollected = Number.isNaN(collected) ? 0 : collected
+      return safeCollected / donations
     }
   }
 }

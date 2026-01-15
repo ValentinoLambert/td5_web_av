@@ -22,8 +22,11 @@ export default {
   },
   computed: {
     progressPercent() {
-      if (!this.cagnotte.goal || this.cagnotte.goal === 0) return 0
-      const percent = (this.cagnotte.collected / this.cagnotte.goal) * 100
+      const goal = Number(this.cagnotte.goal)
+      const collected = Number(this.cagnotte.collected)
+      if (!goal || Number.isNaN(goal)) return 0
+      const safeCollected = Number.isNaN(collected) ? 0 : collected
+      const percent = (safeCollected / goal) * 100
       return Math.min(Math.round(percent), 100)
     },
     daysRemaining() {

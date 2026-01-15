@@ -28,7 +28,7 @@ const router = createRouter({
         {
           path: 'donations',
           name: 'cagnotte-donations',
-          component: () => import('../views/CagnotteDonations.vue')
+          component: () => import('../views/Donations.vue')
         }
       ]
     },

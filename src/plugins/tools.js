@@ -13,7 +13,9 @@ export default {
           return this.dbDateToFr(date) + ' ' + time
         },
         formatAmount(amount) {
-          return amount.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €'
+          const value = Number(amount)
+          if (Number.isNaN(value)) return ''
+          return value.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' ?'
         },
         cutText(text, maxLength = options.textMaxLength) {
           if (text.length <= maxLength) return text
