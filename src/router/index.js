@@ -14,6 +14,11 @@ const router = createRouter({
       path: '/cagnottes/new',
       name: 'cagnottes-new',
       component: CagnottesNew
+    },
+    {
+      path: '/cagnottes/:id',
+      name: 'cagnotte-detail',
+      component: () => import('../views/CagnotteDetail.vue')
     }
   ]
 })
