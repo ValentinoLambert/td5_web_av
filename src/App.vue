@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <h1>Application Vue</h1>
     <RouterView />
   </div>
 </template>
