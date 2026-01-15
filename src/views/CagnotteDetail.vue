@@ -4,6 +4,13 @@
     <div v-else-if="error">ERREUR : {{ error }}</div>
     
     <div v-else>
+      <!-- Bouton retour -->
+      <div style="margin-bottom: 15px;">
+        <router-link to="/" style="text-decoration: none;">
+          ← Retour à la liste
+        </router-link>
+      </div>
+
       <!-- Header -->
       <header class="cagnotte-header">
         <h1>{{ cagnotte.name }}</h1>

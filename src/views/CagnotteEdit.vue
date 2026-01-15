@@ -1,5 +1,11 @@
 <template>
   <div class="cagnotte-edit">
+    <div style="margin-bottom: 15px;">
+      <router-link to="/" style="text-decoration: none;">
+        ← Retour à la liste
+      </router-link>
+    </div>
+
     <h1>Éditer la cagnotte</h1>
     
     <div v-if="loading">Chargement...</div>

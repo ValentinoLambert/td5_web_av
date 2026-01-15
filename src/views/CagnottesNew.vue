@@ -1,5 +1,11 @@
 <template>
   <div>
+    <div style="margin-bottom: 15px;">
+      <router-link to="/" style="text-decoration: none;">
+        ← Retour à la liste
+      </router-link>
+    </div>
+
     <h1>Créer une nouvelle cagnotte</h1>
     
     <form @submit.prevent="createCagnotte">
@@ -63,7 +69,7 @@ export default {
         if (err.response && err.response.data && err.response.data.message) {
           this.error = err.response.data.message
         } else {
-          this.error = 'Une erreur est survenue lors de la création de la cagnotte'
+          this.error = 'Une erreur'
         }
       }
     }

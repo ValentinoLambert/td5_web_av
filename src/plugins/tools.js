@@ -15,11 +15,11 @@ export default {
         formatAmount(amount) {
           const value = Number(amount)
           if (Number.isNaN(value)) return ''
-          return value.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' EUR'
+          return value.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' €'
         },
         cutText(text, maxLength = options.textMaxLength) {
           if (text.length <= maxLength) return text
-          return text.substring(0, maxLength) + '...'
+          return text.substring(0, maxLength) + '…'
         }
       }
     })
