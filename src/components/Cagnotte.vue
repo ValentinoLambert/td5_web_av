@@ -23,7 +23,7 @@ export default {
   computed: {
     progressPercent() {
       if (!this.cagnotte.goal || this.cagnotte.goal === 0) return 0
-      const percent = (this.cagnotte.collected / this.cagnotte.goal) * 100
+      const percent = (this.cagnotte._achieved / this.cagnotte.goal) * 100
       return Math.min(Math.round(percent), 100)
     },
     daysRemaining() {
