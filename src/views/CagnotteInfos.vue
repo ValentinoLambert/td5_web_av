@@ -18,8 +18,8 @@
       </div>
 
       <div class="info-card">
-        <h3>Montant collecté</h3>
-        <p class="info-value">{{ formatAmount(cagnotte._achieved) }}</p>
+        <h3>Montant collecte</h3>
+        <p class="info-value">{{ formatAmount(collectedAmount) }}</p>
       </div>
 
       <div class="info-card">
@@ -37,7 +37,7 @@
 
       <div class="info-card">
         <h3>Donations</h3>
-        <p class="info-value">{{ cagnotte._nb_donations }}</p>
+        <p class="info-value">{{ donationCount }}</p>
         <p class="info-detail">Montant moyen : {{ formatAmount(averageDonation) }}</p>
       </div>
     </div>
@@ -54,29 +54,24 @@ export default {
     }
   },
   computed: {
+    collectedAmount() {
+      const value = Number(this.cagnotte._achieved ?? this.cagnotte.collected)
+      return Number.isNaN(value) ? 0 : value
+    },
+    donationCount() {
+      const value = Number(this.cagnotte._nb_donations ?? this.cagnotte.nb_donations)
+      return Number.isNaN(value) ? 0 : value
+    },
     progressPercent() {
-<<<<<<< HEAD
       const goal = Number(this.cagnotte.goal)
-      const collected = Number(this.cagnotte.collected)
       if (!goal || Number.isNaN(goal)) return 0
-      const safeCollected = Number.isNaN(collected) ? 0 : collected
-      const percent = (safeCollected / goal) * 100
+      const percent = (this.collectedAmount / goal) * 100
       return Math.min(Math.round(percent), 100)
     },
     remaining() {
       const goal = Number(this.cagnotte.goal)
-      const collected = Number(this.cagnotte.collected)
       const safeGoal = Number.isNaN(goal) ? 0 : goal
-      const safeCollected = Number.isNaN(collected) ? 0 : collected
-      return Math.max(0, safeGoal - safeCollected)
-=======
-      if (!this.cagnotte.goal || this.cagnotte.goal === 0) return 0
-      const percent = (this.cagnotte._achieved / this.cagnotte.goal) * 100
-      return Math.min(Math.round(percent), 100)
-    },
-    remaining() {
-      return Math.max(0, this.cagnotte.goal - this.cagnotte._achieved)
->>>>>>> 12e6659a1acb11977323afa48a514c8d806fb8f3
+      return Math.max(0, safeGoal - this.collectedAmount)
     },
     daysRemaining() {
       const endDate = new Date(this.cagnotte.end_date)
@@ -89,7 +84,7 @@ export default {
     daysRemainingText() {
       const days = this.daysRemaining
       if (days < 0) {
-        return `Terminée depuis ${Math.abs(days)} jour${Math.abs(days) > 1 ? 's' : ''}`
+        return `Terminee depuis ${Math.abs(days)} jour${Math.abs(days) > 1 ? 's' : ''}`
       } else if (days === 0) {
         return 'Dernier jour !'
       } else if (days === 1) {
@@ -99,19 +94,9 @@ export default {
       }
     },
     averageDonation() {
-<<<<<<< HEAD
-      const donations = Number(this.cagnotte.nb_donations)
-      const collected = Number(this.cagnotte.collected)
-      if (!donations || Number.isNaN(donations)) return 0
-      const safeCollected = Number.isNaN(collected) ? 0 : collected
-      return safeCollected / donations
-=======
-      if (!this.cagnotte._nb_donations || this.cagnotte._nb_donations === 0) return 0
-      return this.cagnotte._achieved / this.cagnotte._nb_donations
->>>>>>> 12e6659a1acb11977323afa48a514c8d806fb8f3
+      if (!this.donationCount) return 0
+      return this.collectedAmount / this.donationCount
     }
   }
 }
 </script>
-
-
