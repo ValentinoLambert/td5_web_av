@@ -17,8 +17,25 @@ const router = createRouter({
     },
     {
       path: '/cagnottes/:id',
-      name: 'cagnotte-detail',
-      component: () => import('../views/CagnotteDetail.vue')
+      component: () => import('../views/CagnotteDetail.vue'),
+      redirect: to => `/cagnottes/${to.params.id}/infos`,
+      children: [
+        {
+          path: 'infos',
+          name: 'cagnotte-infos',
+          component: () => import('../views/CagnotteInfos.vue')
+        },
+        {
+          path: 'donations',
+          name: 'cagnotte-donations',
+          component: () => import('../views/CagnotteDonations.vue')
+        }
+      ]
+    },
+    {
+      path: '/cagnottes/:id/edit',
+      name: 'cagnotte-edit',
+      component: () => import('../views/CagnotteEdit.vue')
     }
   ]
 })
